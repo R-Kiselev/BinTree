@@ -1,20 +1,20 @@
 #include <iostream>
 
 class BinaryTreeNode {
-private:
-	int value{};
-	BinaryTreeNode* left = nullptr;
-	BinaryTreeNode* right = nullptr;
 public:
+	int value{};
+	BinaryTreeNode* left;
+	BinaryTreeNode* right;
 	BinaryTreeNode(int value) {
 		this->value = value;
+		left = NULL;
+		right = NULL;
 	}
-	// 5 9 12
+	
 	void addNode(int value) {
 		if (value <= this->value) {
 			if (left == nullptr) {
-				BinaryTreeNode leftvalue(value);
-				left = &leftvalue;
+				left = new BinaryTreeNode(value);
 			}
 			else {
 				left->addNode(value);
@@ -22,8 +22,7 @@ public:
 		}
 		else {
 			if (right == nullptr) {
-				BinaryTreeNode rightvalue(value);
-				right = &rightvalue;
+				right = new BinaryTreeNode(value);
 			}
 			else {
 				right->addNode(value);
@@ -34,21 +33,27 @@ public:
 		if (left != nullptr) {
 			left->print();
 		}
+
+		std::cout << value << " ";
+
 		if (right != nullptr) {
 			right->print();
-		}
-		std::cout << value << " ";
-	}
 
+		}
+	}
+/*
+			5
+		4		9
+	3		  6	 12
+*/
 
 };
 
 int main() {
-	BinaryTreeNode root(5);
-	root.addNode(9);
-	root.addNode(12);
-	root.addNode(4);
-	root.addNode(3);
-	root.addNode(6);
+	BinaryTreeNode root(10);
+	for (int i = 0; i < 5; i++) {
+		root.addNode(rand() % 20);
+	}
 	root.print();
+
 }
